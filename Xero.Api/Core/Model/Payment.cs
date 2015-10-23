@@ -47,5 +47,15 @@ namespace Xero.Api.Core.Model
 
         [DataMember(EmitDefaultValue = false)]
         public Account Account { get; set; }
+
+        public Payment ShallowCopy()
+        {
+            Payment clone = (Payment)this.MemberwiseClone();
+
+            if (clone.Invoice != null)
+                clone.Invoice = clone.Invoice.ShallowCopy();
+
+            return clone;
+        }
     }
 }

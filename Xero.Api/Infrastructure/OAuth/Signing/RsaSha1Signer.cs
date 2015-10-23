@@ -17,7 +17,11 @@ namespace Xero.Api.Infrastructure.OAuth.Signing
         {
             var oAuthParameters = new OAuthParameters(
                 new ConsumerKey(token.ConsumerKey),
-                new TokenKey(token.TokenKey),
+
+                //Modified to fix oauth error for private app
+                //new TokenKey(token.TokenKey),
+                new TokenKey(token.ConsumerKey),
+
                 "RSA-SHA1",
                 new DefaultTimestampSequence(),
                 new DefaultNonceSequence(),

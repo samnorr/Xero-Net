@@ -104,5 +104,11 @@ namespace Xero.Api.Core.Model
         [DataMember(EmitDefaultValue = false)]
         public List<Payment> Payments { get; set; }
 
+        public Invoice ShallowCopy()
+        {
+            Invoice clone = (Invoice)this.MemberwiseClone();
+            return clone;
+        }
+
     }
 }
