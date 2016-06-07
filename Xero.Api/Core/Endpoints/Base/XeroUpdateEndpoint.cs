@@ -25,6 +25,12 @@ namespace Xero.Api.Core.Endpoints.Base
             return Post(request);
         }
 
+        public new IXeroUpdateEndpoint<T, TResult, TRequest, TResponse> SummarizeErrors(bool summarize)
+        {
+            AddParameter("summarizeErrors", summarize);
+            return this;
+        }
+
         public virtual TResult Update(TResult item)
         {
             return Update(new[] { item }).First();
