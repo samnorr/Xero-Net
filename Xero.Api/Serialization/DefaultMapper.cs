@@ -73,6 +73,7 @@ namespace Xero.Api.Serialization
             JsConfig<ManualJournalStatus>.DeSerializeFn = EnumDeserializer<ManualJournalStatus>;
             JsConfig<OrganisationStatus>.DeSerializeFn = EnumDeserializer<OrganisationStatus>;
             JsConfig<PaymentStatus>.DeSerializeFn = EnumDeserializer<PaymentStatus>;
+            JsConfig<PurchaseOrderStatus>.DeSerializeFn = EnumDeserializer<PurchaseOrderStatus>;
             JsConfig<ReceiptStatus>.DeSerializeFn = EnumDeserializer<ReceiptStatus>;
             JsConfig<TaxRateStatus>.DeSerializeFn = EnumDeserializer<TaxRateStatus>;
             JsConfig<TrackingCategoryStatus>.DeSerializeFn = EnumDeserializer<TrackingCategoryStatus>;
@@ -83,15 +84,22 @@ namespace Xero.Api.Serialization
             JsConfig<BankTransactionType>.DeSerializeFn = EnumDeserializer<BankTransactionType>;
             JsConfig<CreditNoteType>.DeSerializeFn = EnumDeserializer<CreditNoteType>;
             JsConfig<InvoiceType>.DeSerializeFn = EnumDeserializer<InvoiceType>;
+            JsConfig<ObjectGroupType>.DeSerializeFn = EnumDeserializer<ObjectGroupType>;
+            JsConfig<ObjectGroupType?>.DeSerializeFn = EnumDeserializerNullable<ObjectGroupType>;
+            JsConfig<ObjectType>.DeSerializeFn = EnumDeserializer<ObjectType>;
+            JsConfig<ObjectType?>.DeSerializeFn = EnumDeserializerNullable<ObjectType>;
             JsConfig<OrganisationType>.DeSerializeFn = EnumDeserializer<OrganisationType>;
             JsConfig<OrganisationVersion>.DeSerializeFn = EnumDeserializer<OrganisationVersion>;
+            JsConfig<OverpaymentType>.DeSerializeFn = EnumDeserializer<OverpaymentType>;
             JsConfig<PaymentTermType>.DeSerializeFn = EnumDeserializer<PaymentTermType>;
             JsConfig<PaymentType>.DeSerializeFn = EnumDeserializer<PaymentType>;
             JsConfig<PhoneType>.DeSerializeFn = EnumDeserializer<PhoneType>;
+            JsConfig<PrepaymentType>.DeSerializeFn = EnumDeserializer<PrepaymentType>;
             JsConfig<ReportTaxType>.DeSerializeFn = EnumDeserializer<ReportTaxType>;
             JsConfig<SalesTaxBasisType>.DeSerializeFn = SalesTaxBasis;
             JsConfig<SalesTaxPeriodType>.DeSerializeFn = SalesTaxPeriod;
-            JsConfig<SystemAccountType>.DeSerializeFn = EnumDeserializer<SystemAccountType>;
+            JsConfig<SourceType?>.DeSerializeFn = EnumDeserializerNullable<SourceType>;
+            JsConfig<SystemAccountType?>.DeSerializeFn = EnumDeserializerNullable<SystemAccountType>;
             JsConfig<UnitType>.DeSerializeFn = EnumDeserializer<UnitType>;
             JsConfig<UserRole>.DeSerializeFn = EnumDeserializer<UserRole>;
         }
@@ -136,6 +144,23 @@ namespace Xero.Api.Serialization
 
         private static TEnum EnumDeserializer<TEnum>(string s)
             where TEnum : struct
+        {
+            return EnumDeserializerRun<TEnum>(s);
+        }
+
+        private static TEnum? EnumDeserializerNullable<TEnum>(string s)
+            where TEnum : struct
+        {
+            // first off, is this an empty string? 
+            if (String.IsNullOrEmpty(s))
+            {
+                // ... then just return null
+                return null;
+            }
+            return EnumDeserializerRun<TEnum>(s);
+        }
+
+        private static TEnum EnumDeserializerRun<TEnum>(string s) where TEnum : struct
         {
             TEnum t;
 

@@ -7,7 +7,7 @@ using Xero.Api.Infrastructure.Interfaces;
 namespace Xero.Api.Core.Endpoints.Base
 {
     public abstract class XeroUpdateEndpoint<T, TResult, TRequest, TResponse>
-        : XeroCreateEndpoint<T, TResult, TRequest, TResponse>
+        : XeroCreateEndpoint<T, TResult, TRequest, TResponse>, IXeroUpdateEndpoint<T, TResult, TRequest, TResponse>
         where T : XeroReadEndpoint<T, TResult, TResponse>
         where TResponse : IXeroResponse<TResult>, new()
         where TRequest : IXeroRequest<TResult>, new()
@@ -25,15 +25,9 @@ namespace Xero.Api.Core.Endpoints.Base
             return Post(request);
         }
 
-        public TResult Update(TResult item)
+        public virtual TResult Update(TResult item)
         {
             return Update(new[] { item }).First();
-        }
-
-        public XeroUpdateEndpoint<T, TResult, TRequest, TResponse> SummarizeErrors(bool summarize)
-        {
-            AddParameter("summarizeErrors", summarize);
-            return this;
         }
 
         protected IEnumerable<TResult> Post(TRequest data)
