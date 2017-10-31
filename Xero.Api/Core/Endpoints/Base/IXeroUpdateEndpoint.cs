@@ -15,6 +15,6 @@ namespace Xero.Api.Core.Endpoints.Base
     {
         IEnumerable<TResult> Update(IEnumerable<TResult> items);
         TResult Update(TResult item);
-        IXeroUpdateEndpoint<T, TResult, TRequest, TResponse> SummarizeErrors(bool summarize);
+        new IXeroUpdateEndpoint<T, TResult, TRequest, TResponse> SummarizeErrors(bool summarize);
     }
 }

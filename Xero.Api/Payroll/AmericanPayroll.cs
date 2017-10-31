@@ -22,20 +22,9 @@ namespace Xero.Api.Payroll
             Connect();
         }
 
-        public AmericanPayroll(string baseUri, ICertificateAuthenticator auth, IConsumer consumer, IUser user,
-            IJsonObjectMapper readMapper, IXmlObjectMapper writeMapper)
-            : base(baseUri, auth, consumer, user, readMapper, writeMapper, null)
-        {
-        }
-
-        public AmericanPayroll(string baseUri, ICertificateAuthenticator auth, IConsumer consumer, IUser user, IJsonObjectMapper readMapper, IXmlObjectMapper writeMapper, IRateLimiter rateLimiter)
-            : base(baseUri, auth, consumer, user, readMapper, writeMapper, rateLimiter)
-        {
-            Connect();
-        }
-
         public WorkLocationsEndpoint WorkLocations { get; private set; }
         public PayStubsEndpoint PayStubs { get; private set; }
+        public PayItemsEndpoint PayItems { get; private set; }
         public PaySchedulesEndpoint PaySchedules { get; private set; }
         public EmployeesEndpoint Employees { get; private set; }
         public PayRunsEndpoint PayRuns { get; private set; }
@@ -46,6 +35,7 @@ namespace Xero.Api.Payroll
         {
             WorkLocations = new WorkLocationsEndpoint(Client);
             PayStubs = new PayStubsEndpoint(Client);
+            PayItems = new PayItemsEndpoint(Client);
             PaySchedules = new PaySchedulesEndpoint(Client);
             Employees = new EmployeesEndpoint(Client);
             PayRuns = new PayRunsEndpoint(Client);

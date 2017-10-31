@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
@@ -41,6 +45,7 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\IHasAttachment.cs" />
     <Compile Include="Common\IHasId.cs" />
     <Compile Include="Common\IPageableEndpoint.cs" />
     <Compile Include="Common\IXeroReadEndpoint.cs" />
@@ -54,6 +59,7 @@
     <Compile Include="Core\Endpoints\FoldersEndpoint.cs" />
     <Compile Include="Core\Endpoints\InboxEndpoint.cs" />
     <Compile Include="Core\Endpoints\LinkedTransactionsEndpoint.cs" />
+    <Compile Include="Core\Model\EnumExtensions.cs" />
     <Compile Include="Core\Model\OnlineInvoice.cs" />
     <Compile Include="Core\IXeroCoreApi.cs" />
     <Compile Include="Core\Endpoints\PurchaseOrdersEndpoint.cs" />
@@ -240,25 +246,29 @@
     <Compile Include="Core\Model\Status\EmployeeStatus.cs" />
     <Compile Include="Core\Response\AccountsResponse.cs" />
     <Compile Include="Core\Endpoints\OrganisationEndpoint.cs" />
-    <Compile Include="Infrastructure\Interfaces\ICertificateAuthenticator.cs" />
     <Compile Include="Infrastructure\Interfaces\IJsonObjectMapper.cs" />
     <Compile Include="Infrastructure\Interfaces\ITokenStore.cs" />
     <Compile Include="Infrastructure\Exceptions\XeroApiException.cs" />
     <Compile Include="Core\Endpoints\BrandingThemesEndpoint.cs" />
+    <Compile Include="Infrastructure\OAuth\UnexpectedOauthResponseException.cs" />
     <Compile Include="Infrastructure\RateLimiter\IRateLimiter.cs" />
     <Compile Include="Infrastructure\RateLimiter\RateLimiter.cs" />
     <Compile Include="Infrastructure\ThirdParty\HttpUtility\UrlEncoder.cs" />
     <Compile Include="Infrastructure\ThirdParty\HttpUtility\HttpEncoder.cs" />
     <Compile Include="Infrastructure\ThirdParty\HttpUtility\HttpUtility.cs" />
+    <Compile Include="Payroll\America\Endpoints\PayItemsEndpoint.cs" />
     <Compile Include="Payroll\America\Endpoints\TimesheetsEndpoint.cs" />
     <Compile Include="Payroll\America\Model\Timesheet.cs" />
     <Compile Include="Payroll\America\Model\TimesheetLine.cs" />
     <Compile Include="Payroll\America\Model\Types\State.cs" />
+    <Compile Include="Payroll\America\Request\PayItemsRequest.cs" />
     <Compile Include="Payroll\America\Request\TimesheetsRequest.cs" />
+    <Compile Include="Payroll\America\Response\PayItemsResponse.cs" />
     <Compile Include="Payroll\America\Response\SettingsResponse.cs" />
     <Compile Include="Payroll\America\Response\TimesheetsResponse.cs" />
     <Compile Include="Payroll\Australia\Endpoints\TimesheetsEndpoint.cs" />
     <Compile Include="Payroll\Australia\Model\LeaveBalance.cs" />
+    <Compile Include="Payroll\Australia\Model\PayslipEarningsLine.cs" />
     <Compile Include="Payroll\Australia\Model\Settings.cs" />
     <Compile Include="Payroll\Australia\Model\Timesheet.cs" />
     <Compile Include="Payroll\Australia\Model\TimesheetLine.cs" />
@@ -266,6 +276,7 @@
     <Compile Include="Payroll\Australia\Response\SettingsResponse.cs" />
     <Compile Include="Payroll\Australia\Response\TimesheetsResponse.cs" />
     <Compile Include="Payroll\Common\Model\NumberOfUnits.cs" />
+    <Compile Include="Payroll\Common\Model\PayrollSettingsTrackingCategories.cs" />
     <Compile Include="Serialization\DefaultMapper.cs" />
     <Compile Include="Core\Endpoints\UsersEndpoint.cs" />
     <Compile Include="Core\Model\Types\AddressType.cs" />
@@ -555,6 +566,7 @@
     <Compile Include="Infrastructure\ThirdParty\ServiceStack.Text\XmlSerializer.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
