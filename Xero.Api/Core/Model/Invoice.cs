@@ -107,6 +107,9 @@ namespace Xero.Api.Core.Model
         [DataMember(EmitDefaultValue = false)]
         public List<Payment> Payments { get; set; }
 
+        [DataMember(EmitDefaultValue = false, Name = "CISDeduction")]
+        public decimal? CisDeduction { get; set; }
+
         public Invoice ShallowCopy()
         {
             Invoice clone = (Invoice)this.MemberwiseClone();
